@@ -1,17 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import ReactDOM from 'react-dom';
+import './Style/index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './Redux/authReducer';
+import stores from './Redux/store';
+// Tạo store Redux từ rootReducer
+const store = createStore(rootReducer);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+// Sử dụng ReactDOM.render để render ứng dụng
+ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <Provider store={store&&stores}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
